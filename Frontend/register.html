@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Auth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+
+<form action="" id="registerform">
+     
+    <div>
+        <h1>Register</h1>
+
+        <div>
+            <label for="">Username</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+        <br>
+        <div>
+            <label for="">Email</label>
+            <input type="text" id="email" placeholder="Enter email">
+        </div>
+        <br>
+        <div>
+            <label for="">Password</label>
+            <input type="password" placeholder="Enter password">
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+
+    </div>
+</form>
+
+
+    <script>
+        document.getElementById('registerform').addEventListener("submit", async(e) => {
+            e.preventDefault()
+
+            const username = document.getElementById('username').value
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
+
+            const res = await fetch("http://localhost:3000/user/register", {
+                method: "POST", 
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({username, email, password})
+            })
+
+            const data = await res.json()
+            alert(data.message)
+        })
+
+    </script>
+</body>
+</html>
